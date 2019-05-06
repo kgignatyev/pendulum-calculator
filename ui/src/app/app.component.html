@@ -1,0 +1,72 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <form ngNoForm (keydown)="keyDownFunction($event)">
+        <div class="form-group row">
+          <label for="repeatPeriod" class="col-sm-8 col-form-label">Repeat Period (seconds)</label>
+          <div class="col-sm-4">
+            <input type="number" class="form-control" id="repeatPeriod" [(ngModel)]="repeatPeriod" >
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="lenghtOfFirst" class="col-sm-8 col-form-label">First Pendulum (meters)</label>
+          <div class="col-sm-4">
+            <input type="number" class="form-control" id="lenghtOfFirst" [(ngModel)]="lengthFirst">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="numPendilums" class="col-sm-8 col-form-label">Num Pendilums</label>
+          <div class="col-sm-4">
+            <input type="number" class="form-control" id="numPendilums" [(ngModel)]="numPendilums">
+          </div>
+        </div>
+        <div class="form-group row">
+
+          <div class="col-sm-8">
+            <button class="btn btn-info" type="button"  (click)="calcLengths()">Calculate</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-8">
+      <img height="230" alt="Angular Logo" src="assets/pendilums.png"/>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 10px">
+    <div class="col-md-5">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Length (meters)</th>
+          <th>Length (ft/inch)</th>
+<!--          <th>Length (ft/inch)</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let l of lengths;let i = index" >
+          <td>{{i+1}}: {{l| number:'.3'}}</td>
+          <td>{{toImperial(l)}}</td>
+<!--          <td>{{toImperial(l-0.0254)}}</td>-->
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="com-md-5">
+      <pendilum-animation></pendilum-animation>
+    </div>
+  </div>
+</div>
+
+
+<router-outlet></router-outlet>
+
+
